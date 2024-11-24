@@ -1,0 +1,315 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PalmLove 2022</title>
+    <style>
+        :root {
+            --primary-color: #ff4d6d;
+            --secondary-color: #2d3436;
+            --background: #f5f6fa;
+            --text-color: #2d3436;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--background);
+            color: var(--text-color);
+        }
+
+        .watermark {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            opacity: 0.5;
+            font-size: 12px;
+            color: var(--secondary-color);
+            z-index: 1000;
+        }
+
+        nav {
+            background: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 80px auto 0;
+            padding: 2rem;
+        }
+
+        .post-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        .post-input {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+            resize: none;
+        }
+
+        .upload-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background 0.3s;
+        }
+
+        .upload-btn:hover {
+            background: #ff3657;
+        }
+
+        .feed {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .post {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .post-header {
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .post-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #ddd;
+        }
+
+        .post-user {
+            font-weight: 500;
+        }
+
+        .post-time {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .post-video {
+            width: 100%;
+            max-height: 500px;
+            object-fit: cover;
+        }
+
+        .post-actions {
+            padding: 1rem;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .action-btn {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .action-btn:hover {
+            color: var(--primary-color);
+        }
+
+        @media (max-width: 768px) {
+            .nav-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            main {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="watermark">a FakeWeb project</div>
+    
+    <nav>
+        <div class="nav-content">
+            <div class="logo">PalmLove 2022</div>
+            <div class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#explore">Explore</a>
+                <a href="#notifications">Notifications</a>
+                <a href="#profile">Profile</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <div class="post-form">
+            <textarea class="post-input" placeholder="Share your thoughts..."></textarea>
+            <button class="upload-btn">Upload Video</button>
+        </div>
+
+        <div class="feed">
+            <article class="post">
+                <div class="post-header">
+                    <div class="post-avatar"></div>
+                    <div>
+                        <div class="post-user">John Doe</div>
+                        <div class="post-time">2 hours ago</div>
+                    </div>
+                </div>
+                <video class="post-video" controls>
+                    <source src="sample-video.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <div class="post-actions">
+                    <button class="action-btn">
+                        <span>❤️</span>
+                        <span>Like</span>
+                    </button>
+                    <button class="action-btn">
+                        <span>💬</span>
+                        <span>Comment</span>
+                    </button>
+                    <button class="action-btn">
+                        <span>↗️</span>
+                        <span>Share</span>
+                    </button>
+                </div>
+            </article>
+        </div>
+    </main>
+
+    <script>
+        // Video upload functionality
+        const uploadBtn = document.querySelector('.upload-btn');
+        const postInput = document.querySelector('.post-input');
+        const feed = document.querySelector('.feed');
+
+        uploadBtn.addEventListener('click', () => {
+            const fileInput = document.createElement('input');
+            fileInput.type = 'file';
+            fileInput.accept = 'video/*';
+            
+            fileInput.addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    createPost(file);
+                }
+            });
+
+            fileInput.click();
+        });
+
+        function createPost(videoFile) {
+            const post = document.createElement('article');
+            post.className = 'post';
+            
+            const postHeader = `
+                <div class="post-header">
+                    <div class="post-avatar"></div>
+                    <div>
+                        <div class="post-user">You</div>
+                        <div class="post-time">Just now</div>
+                    </div>
+                </div>
+            `;
+
+            const videoElement = document.createElement('video');
+            videoElement.className = 'post-video';
+            videoElement.controls = true;
+            videoElement.src = URL.createObjectURL(videoFile);
+
+            const postActions = `
+                <div class="post-actions">
+                    <button class="action-btn">
+                        <span>❤️</span>
+                        <span>Like</span>
+                    </button>
+                    <button class="action-btn">
+                        <span>💬</span>
+                        <span>Comment</span>
+                    </button>
+                    <button class="action-btn">
+                        <span>↗️</span>
+                        <span>Share</span>
+                    </button>
+                </div>
+            `;
+
+            post.innerHTML = postHeader;
+            post.appendChild(videoElement);
+            post.innerHTML += postActions;
+
+            feed.insertBefore(post, feed.firstChild);
+            postInput.value = '';
+        }
+
+        // Like button functionality
+        document.addEventListener('click', (e) => {
+            if (e.target.closest('.action-btn')) {
+                const btn = e.target.closest('.action-btn');
+                btn.classList.toggle('liked');
+            }
+        });
+    </script>
+</body>
+</html>
